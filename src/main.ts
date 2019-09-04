@@ -25,15 +25,7 @@ async function run() {
 
     await runTest();
 
-    console.log(JSON.stringify(process.env, null, 2));
-    console.log(fs.readdirSync(__dirname));
-    console.log(fs.readdirSync(path.join(__dirname, '..')));
-    console.log(fs.readdirSync(path.join(__dirname, '..', '..')));
-    console.log(fs.readdirSync(path.join(__dirname, '..', '..', '..')));
-    console.log(fs.readdirSync(path.join(__dirname, '..', '..', '..', '..')));
-    console.log(
-      fs.readdirSync(path.join(__dirname, '..', '..', '..', '..', '..'))
-    );
+    console.log(fs.readdirSync(process.env.RUNNER_WORKSPACE as string));
 
     await createChecksFromTestResults({
       pathToTestOutput: path.join(__dirname, 'test_results.json'),
