@@ -61,9 +61,10 @@ export async function createChecksFromTestResults({
     owner,
     repo,
     ref,
-    check_name: name,
     status: 'in_progress'
   });
+
+  console.log(JSON.stringify(checkRunsResult.data.check_runs, null, 2));
 
   if (checkRunsResult.data.check_runs.length === 0) {
     throw new Error(`Could not find check run for action: ${name}`);
@@ -92,7 +93,7 @@ export async function createChecksFromTestResults({
         owner,
         repo,
         check_run_id: checkRun.id,
-        name,
+        name: checkRun.name,
         output: checks
       });
     }
