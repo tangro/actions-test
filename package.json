@@ -1,6 +1,6 @@
 {
   "name": "tangro-actions-template",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Add a description here",
   "main": "lib/main.js",
