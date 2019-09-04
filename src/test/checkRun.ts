@@ -71,6 +71,8 @@ export async function createChecksFromTestResults({
     const testResults = parseTestOutput(pathToTestOutput);
     // GitHub only allows to send 50 checks at a time
     const chunkedTestResults = chunkArray(testResults, 50);
+    console.log('testResults', testResults);
+    console.log('chunkedTestResults', chunkedTestResults);
     for (const chunk of chunkedTestResults) {
       const checks = {
         title: 'Test results',
