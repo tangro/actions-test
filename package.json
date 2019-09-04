@@ -1,0 +1,33 @@
+{
+  "name": "tangro-actions-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Add a description here",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "ncc build src/main.ts --minify",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangro/tangro-actions-template.git"
+  },
+  "keywords": [
+    "actions"
+  ],
+  "author": "ankri",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "@tangro/tangro-github-toolkit": "0.4.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.4",
+    "@zeit/ncc": "^0.20.4",
+    "jest": "^24.8.0",
+    "jest-circus": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.1"
+  }
+}

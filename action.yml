@@ -1,0 +1,10 @@
+name: 'Tangro Actions template'
+description: 'Add a description'
+author: 'tangro'
+inputs:
+  example-input:
+    description: 'Add more inputs here'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

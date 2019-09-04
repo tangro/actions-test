@@ -1,0 +1,30 @@
+name: release action
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: go to release branch
+        run: git checkout -B $(node -p -e "require('./package.json').version")
+      - name: merge with master
+        run: git merge origin/master --no-edit
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+      - name: npm install
+        run: npm install
+      - name: run build
+        run: npm run build
+      - name: add and push
+        run: |
+          git config user.name "${{ secrets.RELEASE_USERNAME }}"
+          git config user.email "${{ secrets.RELEASE_USERNAME }}@users.noreply.github.com"
+          git add -A
+          git commit -m "released new version"
+          git push --force https://${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}.git $(node -p -e "require('./package.json').version")
