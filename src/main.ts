@@ -3,7 +3,7 @@ import { GitHubContext } from '@tangro/tangro-github-toolkit';
 import path from 'path';
 import { createChecksFromTestResults } from './test/checkRun';
 import { runTest } from './test/runTest';
-import { pathToFileURL } from 'url';
+import * as fs from 'fs';
 
 async function run() {
   try {
@@ -24,6 +24,16 @@ async function run() {
     ) as GitHubContext;
 
     await runTest();
+
+    console.log(JSON.stringify(process.env, null, 2));
+    console.log(fs.readdirSync(__dirname));
+    console.log(fs.readdirSync(path.join(__dirname, '..')));
+    console.log(fs.readdirSync(path.join(__dirname, '..', '..')));
+    console.log(fs.readdirSync(path.join(__dirname, '..', '..', '..')));
+    console.log(fs.readdirSync(path.join(__dirname, '..', '..', '..', '..')));
+    console.log(
+      fs.readdirSync(path.join(__dirname, '..', '..', '..', '..', '..'))
+    );
 
     await createChecksFromTestResults({
       pathToTestOutput: path.join(__dirname, 'test_results.json'),
