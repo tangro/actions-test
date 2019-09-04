@@ -87,36 +87,40 @@ export async function createChecksFromTestResults({
         })
       };
 
-      console.log(JSON.stringify(checks));
+      console.log('checks', JSON.stringify(checks));
 
-      await github.checks.update({
+      const response = await github.checks.update({
         owner,
         repo,
         check_run_id: checkRun.id,
         name: checkRun.name,
         output: checks
       });
-    }
 
-    console.log(
-      JSON.stringify(
-        await github.checks.listForRef({
+      console.log('response', response);
+
+      console.log(
+        'listForRef',
+        JSON.stringify(
+          await github.checks.listForRef({
+            owner,
+            repo,
+            ref
+          }),
+          null,
+          2
+        )
+      );
+
+      console.log(
+        'listAnnotations',
+        await github.checks.listAnnotations({
           owner,
           repo,
-          ref
-        }),
-        null,
-        2
-      )
-    );
-
-    console.log(
-      await github.checks.listAnnotations({
-        owner,
-        repo,
-        check_run_id: checkRun.id
-      })
-    );
+          check_run_id: checkRun.id
+        })
+      );
+    }
 
     const aggregatedResult = require(pathToTestOutput) as AggregatedResult;
     return aggregatedResult;
