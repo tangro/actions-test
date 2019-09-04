@@ -14,10 +14,14 @@ export async function runTest() {
   };
   const command = core.getInput('command') || 'test:ci';
 
-  await exec('npm', ['run', command, '--silent'], options);
+  try {
+    await exec('npm', ['run', command, '--silent'], options);
+  } catch (error) {
+    console.log('!!!', error);
+  }
 
   try {
-    console.log('Writing test results to test_result/index.html');
+    console.log('Writing test log to test_result/index.html');
     fs.mkdirSync('test_result');
     fs.writeFileSync(
       path.join('test_result', 'index.html'),
