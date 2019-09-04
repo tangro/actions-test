@@ -26,6 +26,11 @@ async function run() {
     await runTest();
 
     console.log(fs.readdirSync(process.env.RUNNER_WORKSPACE as string));
+    console.log(
+      fs.readdirSync(
+        path.join(process.env.RUNNER_WORKSPACE as string, 'tangro-stella-data')
+      )
+    );
 
     await createChecksFromTestResults({
       pathToTestOutput: path.join(__dirname, 'test_results.json'),
