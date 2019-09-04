@@ -1,4 +1,4 @@
-import { AggregatedResult } from '@jest/test-result';
+import { FormattedTestResults } from '@jest/test-result/build/types';
 import { github, GitHubContext } from '@tangro/tangro-github-toolkit';
 
 function chunkArray<T>(
@@ -22,23 +22,23 @@ function chunkArray<T>(
 }
 
 function parseTestOutput(pathToTestOutput: string) {
-  const testResults = require(pathToTestOutput) as AggregatedResult;
-  console.log(testResults);
+  const testResults = require(pathToTestOutput) as FormattedTestResults;
   if (testResults.numFailedTestSuites > 0) {
     const testSuitesWithFailingTests = testResults.testResults.filter(
-      suite => suite.numFailingTests > 0
+      suite => suite.status === 'failed'
     );
+
     return testSuitesWithFailingTests
       .map(suite => {
-        const failingTests = suite.testResults.filter(
+        const failingTests = suite.assertionResults.filter(
           test => test.status === 'failed'
         );
         return failingTests.map(test => {
           return {
             title: test.ancestorTitles.join(' > ') + ' > ' + test.title,
-            failureMessages: test.failureMessages.join('\n\n'),
+            failureMessages: (test.failureMessages || []).join('\n\n'),
             location: test.location,
-            path: suite.testFilePath
+            path: suite.name
           };
         });
       })
@@ -125,7 +125,7 @@ export async function createChecksFromTestResults({
       );
     }
 
-    const aggregatedResult = require(pathToTestOutput) as AggregatedResult;
+    const aggregatedResult = require(pathToTestOutput) as FormattedTestResults;
     return aggregatedResult;
   }
 }
