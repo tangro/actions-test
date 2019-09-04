@@ -32,8 +32,14 @@ async function run() {
       )
     );
 
+    const [owner, repo] = context.repository.split('/');
+
     await createChecksFromTestResults({
-      pathToTestOutput: path.join(__dirname, 'test_results.json'),
+      pathToTestOutput: path.join(
+        process.env.RUNNER_WORKSPACE as string,
+        repo,
+        'test_results.json'
+      ),
       context
     });
 
