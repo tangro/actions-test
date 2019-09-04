@@ -83,7 +83,7 @@ export async function createChecksFromTestResults({
         annotations: chunk.map(testResult => {
           return {
             path: testResult.path.replace(
-              `${process.env.RUNNER_WORKSPACE as string}/`,
+              `${process.env.RUNNER_WORKSPACE as string}/${repo}/src/`,
               ''
             ),
             start_line: testResult.location!.line,
@@ -95,7 +95,7 @@ export async function createChecksFromTestResults({
         })
       };
 
-      const response = await github.checks.update({
+      await github.checks.update({
         owner,
         repo,
         check_run_id: checkRun.id,
