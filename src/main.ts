@@ -25,13 +25,6 @@ async function run() {
 
     await runTest();
 
-    console.log(fs.readdirSync(process.env.RUNNER_WORKSPACE as string));
-    console.log(
-      fs.readdirSync(
-        path.join(process.env.RUNNER_WORKSPACE as string, 'tangro-stella-data')
-      )
-    );
-
     const [owner, repo] = context.repository.split('/');
 
     const testResults = await createChecksFromTestResults({
