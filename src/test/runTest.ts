@@ -6,26 +6,17 @@ import { ExecOptions } from '@actions/exec/lib/interfaces';
 
 export async function runTest() {
   let output = '';
-  let errorMessages = '';
   const options: ExecOptions = {
     ignoreReturnCode: true,
     listeners: {
       stdout: (data: Buffer) => {
         output += data.toString();
-      },
-      stderr: (data: Buffer) => {
-        errorMessages += data.toString();
       }
     }
   };
   const command = core.getInput('command') || 'test:ci';
 
-  try {
-    await exec('npm', ['run', command], options);
-    console.log('...', errorMessages);
-  } catch (error) {
-    console.log('!!!', error);
-  }
+  await exec('npm', ['run', command], options);
 
   try {
     console.log('Writing test log to test_result/index.html');

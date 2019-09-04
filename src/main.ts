@@ -42,8 +42,6 @@ async function run() {
       ),
       context
     });
-
-    core.debug('debug message');
   } catch (error) {
     core.setFailed(error.message);
   }

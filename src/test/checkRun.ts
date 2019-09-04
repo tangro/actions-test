@@ -53,7 +53,7 @@ export async function createChecksFromTestResults({
 }: {
   pathToTestOutput: string;
   context: GitHubContext;
-}): Promise<void> {
+}) {
   const name = context.action;
   const ref = context.ref;
   const [owner, repo] = context.repository.split('/');
@@ -95,5 +95,8 @@ export async function createChecksFromTestResults({
         output: checks
       });
     }
+
+    const aggregatedResult = require(pathToTestOutput) as AggregatedResult;
+    return aggregatedResult;
   }
 }
