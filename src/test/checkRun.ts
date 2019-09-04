@@ -64,8 +64,6 @@ export async function createChecksFromTestResults({
     status: 'in_progress'
   });
 
-  console.log(JSON.stringify(checkRunsResult.data.check_runs, null, 2));
-
   if (checkRunsResult.data.check_runs.length === 0) {
     throw new Error(`Could not find check run for action: ${name}`);
   } else {

@@ -1,7 +1,9 @@
 import * as core from '@actions/core';
 import { GitHubContext } from '@tangro/tangro-github-toolkit';
+import path from 'path';
 import { createChecksFromTestResults } from './test/checkRun';
 import { runTest } from './test/runTest';
+import { pathToFileURL } from 'url';
 
 async function run() {
   try {
@@ -24,7 +26,7 @@ async function run() {
     await runTest();
 
     await createChecksFromTestResults({
-      pathToTestOutput: './test_results.json',
+      pathToTestOutput: path.join(__dirname, 'test_results.json'),
       context
     });
 
