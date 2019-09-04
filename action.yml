@@ -1,10 +1,10 @@
-name: 'Tangro Actions template'
-description: 'Add a description'
+name: 'actions-test'
+description: 'Run jest tests, add status and checks'
 author: 'tangro'
 inputs:
-  example-input:
-    description: 'Add more inputs here'
-    required: true
+  command:
+    description: 'The name of the npm script to call. Default is "test:ci"'
+    default: 'test:ci'
 runs:
   using: 'node12'
   main: 'dist/index.js'

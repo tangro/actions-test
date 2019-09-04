@@ -19,6 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.0.0",
+    "@actions/exec": "^1.0.0",
+    "@jest/test-result": "^24.9.0",
     "@tangro/tangro-github-toolkit": "0.4.0"
   },
   "devDependencies": {
