@@ -34,7 +34,7 @@ async function run() {
 
     const [owner, repo] = context.repository.split('/');
 
-    await createChecksFromTestResults({
+    const testResults = await createChecksFromTestResults({
       pathToTestOutput: path.join(
         process.env.RUNNER_WORKSPACE as string,
         repo,
@@ -42,6 +42,10 @@ async function run() {
       ),
       context
     });
+
+    if (testResults.numFailedTestSuites > 0) {
+      core.setFailed('Tests failed. See details.');
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
