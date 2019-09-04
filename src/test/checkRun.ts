@@ -79,7 +79,7 @@ export async function createChecksFromTestResults({
         annotations: chunk.map(testResult => {
           return {
             path: testResult.path.replace(
-              `${process.env.RUNNER_WORKSPACE as string}/${repo}`,
+              `${process.env.RUNNER_WORKSPACE as string}/`,
               ''
             ),
             start_line: testResult.location!.line,
