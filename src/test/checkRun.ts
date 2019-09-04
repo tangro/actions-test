@@ -23,6 +23,7 @@ function chunkArray<T>(
 
 function parseTestOutput(pathToTestOutput: string) {
   const testResults = require(pathToTestOutput) as AggregatedResult;
+  console.log(testResults);
   if (testResults.numFailedTestSuites > 0) {
     const testSuitesWithFailingTests = testResults.testResults.filter(
       suite => suite.numFailingTests > 0
