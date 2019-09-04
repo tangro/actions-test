@@ -58,19 +58,27 @@ export async function createChecksFromTestResults({
   const name = context.action;
   const ref = context.ref;
   const [owner, repo] = context.repository.split('/');
-  const checkRunsResult = await github.checks.listForRef({
+  // const checkRunsResult = await github.checks.listForRef({
+  //   owner,
+  //   repo,
+  //   ref,
+  //   status: 'in_progress'
+  // });
+
+  const response = await github.checks.create({
+    head_sha: context.sha,
+    name: 'tests',
     owner,
-    repo,
-    ref,
-    status: 'in_progress'
+    repo
   });
 
-  if (checkRunsResult.data.check_runs.length === 0) {
+  // if (checkRunsResult.data.check_runs.length === 0) {
+  if (response.status !== 200) {
     throw new Error(`Could not find check run for action: ${name}`);
   } else {
     const formattedTestResults = require(pathToTestOutput) as FormattedTestResults;
 
-    const checkRun = checkRunsResult.data.check_runs[0];
+    const checkRun = response.data; // checkRunsResult.data.check_runs[0];
     const testResults = parseTestOutput(formattedTestResults);
     // GitHub only allows to send 50 checks at a time
     const chunkedTestResults = chunkArray(testResults, 50);
