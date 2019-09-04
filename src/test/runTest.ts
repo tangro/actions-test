@@ -19,7 +19,7 @@ export async function runTest() {
   const command = core.getInput('command') || 'test:ci';
 
   try {
-    await exec('npm', ['run', command, '--silent'], options);
+    await exec('npm', ['run', command, '--silent', '2> /dev/null'], options);
     console.log('...', errorMessages);
   } catch (error) {
     console.log('!!!', error);
