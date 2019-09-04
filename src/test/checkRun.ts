@@ -1,5 +1,6 @@
 import { FormattedTestResults } from '@jest/test-result/build/types';
 import { github, GitHubContext } from '@tangro/tangro-github-toolkit';
+import { parseTests } from './parseTests';
 
 function chunkArray<T>(
   inputArray: Array<T>,
@@ -21,8 +22,7 @@ function chunkArray<T>(
   );
 }
 
-function parseTestOutput(pathToTestOutput: string) {
-  const testResults = require(pathToTestOutput) as FormattedTestResults;
+function parseTestOutput(testResults: FormattedTestResults) {
   if (testResults.numFailedTestSuites > 0) {
     const testSuitesWithFailingTests = testResults.testResults.filter(
       suite => suite.status === 'failed'
@@ -54,7 +54,7 @@ export async function createChecksFromTestResults({
 }: {
   pathToTestOutput: string;
   context: GitHubContext;
-}) {
+}): Promise<FormattedTestResults> {
   const name = context.action;
   const ref = context.ref;
   const [owner, repo] = context.repository.split('/');
@@ -68,14 +68,18 @@ export async function createChecksFromTestResults({
   if (checkRunsResult.data.check_runs.length === 0) {
     throw new Error(`Could not find check run for action: ${name}`);
   } else {
+    const formattedTestResults = require(pathToTestOutput) as FormattedTestResults;
+
     const checkRun = checkRunsResult.data.check_runs[0];
-    const testResults = parseTestOutput(pathToTestOutput);
+    const testResults = parseTestOutput(formattedTestResults);
     // GitHub only allows to send 50 checks at a time
     const chunkedTestResults = chunkArray(testResults, 50);
+    const testSummary = parseTests(formattedTestResults);
+
     for (const chunk of chunkedTestResults) {
       const checks = {
         title: 'Test results',
-        summary: 'We need a summary',
+        summary: testSummary.text,
         annotations: chunk.map(testResult => {
           return {
             path: testResult.path.replace(
@@ -100,7 +104,6 @@ export async function createChecksFromTestResults({
       });
     }
 
-    const aggregatedResult = require(pathToTestOutput) as FormattedTestResults;
-    return aggregatedResult;
+    return formattedTestResults;
   }
 }

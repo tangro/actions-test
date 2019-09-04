@@ -3,7 +3,6 @@ import { GitHubContext } from '@tangro/tangro-github-toolkit';
 import path from 'path';
 import { createChecksFromTestResults } from './test/checkRun';
 import { runTest } from './test/runTest';
-import * as fs from 'fs';
 
 async function run() {
   try {
