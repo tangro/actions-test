@@ -5,17 +5,22 @@ import path from 'path';
 
 export async function runTest() {
   let output = '';
+  let errorMessages = '';
   const options = {
     listeners: {
       stdout: (data: Buffer) => {
         output += data.toString();
+      },
+      stderr: (data: Buffer) => {
+        errorMessages += data.toString();
       }
     }
   };
   const command = core.getInput('command') || 'test:ci';
 
   try {
-    await exec('npm', ['run', command, '--silent', '2> /dev/null'], options);
+    await exec('npm', ['run', command, '--silent'], options);
+    console.log('...', errorMessages);
   } catch (error) {
     console.log('!!!', error);
   }
