@@ -14,7 +14,11 @@ export async function runTest() {
   };
   const command = core.getInput('command') || 'test:ci';
 
-  await exec('npm', ['run', command], options);
+  try {
+    await exec('npm', ['run', command], options);
+  } catch (error) {
+    console.log('???', error);
+  }
 
   try {
     fs.mkdirSync('test_result');
