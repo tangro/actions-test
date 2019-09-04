@@ -72,15 +72,16 @@ export async function createChecksFromTestResults({
     const testResults = parseTestOutput(pathToTestOutput);
     // GitHub only allows to send 50 checks at a time
     const chunkedTestResults = chunkArray(testResults, 50);
-    console.log('testResults', testResults);
-    console.log('chunkedTestResults', chunkedTestResults);
     for (const chunk of chunkedTestResults) {
       const checks = {
         title: 'Test results',
         summary: 'We need a summary',
         annotations: chunk.map(testResult => {
           return {
-            path: testResult.path,
+            path: testResult.path.replace(
+              `${process.env.RUNNER_WORKSPACE as string}/${repo}`,
+              ''
+            ),
             start_line: testResult.location!.line,
             end_line: testResult.location!.line,
             annotation_level: 'failure' as 'failure',
@@ -90,8 +91,6 @@ export async function createChecksFromTestResults({
         })
       };
 
-      console.log('checks', JSON.stringify(checks));
-
       const response = await github.checks.update({
         owner,
         repo,
@@ -99,30 +98,6 @@ export async function createChecksFromTestResults({
         name: checkRun.name,
         output: checks
       });
-
-      console.log('response', response);
-
-      console.log(
-        'listForRef',
-        JSON.stringify(
-          await github.checks.listForRef({
-            owner,
-            repo,
-            ref
-          }),
-          null,
-          2
-        )
-      );
-
-      console.log(
-        'listAnnotations',
-        await github.checks.listAnnotations({
-          owner,
-          repo,
-          check_run_id: checkRun.id
-        })
-      );
     }
 
     const aggregatedResult = require(pathToTestOutput) as FormattedTestResults;
