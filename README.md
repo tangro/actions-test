@@ -1,45 +1,69 @@
-# tangro-actions-template
+# actions-test
 
-A GitHub Action template for tangro GitHub actions. It has the build step, the workflow and some dependencies pre-configured.
+Run jest tests, add annotations to failing tests. By default it runs `npm run test:ci` but it can be configured: `npm run ${command}`.
 
-# Development
+# Example job
 
-Create a new repository and copy the contents of this template repository to the new repository. Do not forget the `.github` folder it may be hidden on your machine.
+```yml
+test:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout latest code
+      uses: actions/checkout@v1
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Run npm install
+      run: npm install
+    - name: Run tests
+      uses: tangro/actions-test@1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+```
 
-# Setting up to publish
+> **Attention** Do not forget to pass the `GITHUB_TOKEN` and `GITHUB_CONTEXT` to the `actions-test` action
 
-In your newley created action repository you have to set two secrets:
+Steps the example job will perform:
 
-- `RELEASE_USERNAME` - The name of the GitHub user that will automatically publish the action
-- `RELEASE_TOKEN` - A [personal access token](https://github.com/settings/tokens) for that user
+1. Check out the latest code
+2. Use node v12
+3. Run `npm install`
+4. (this action) Run the tests, add the annotations and add a status to the commit
 
-# Publishing an action
+# Usage
 
-> **Important** Do **not** run `npm build`. It will be done automatically. And do not check in the `dist` directory.
+The action will call `npm run ${command}`. The `${command}` can be specified by passing an input variable `command` to the action. It defaults to `test:ci`. The `command` should look like this: `jest --testLocationInResults --ci --outputFile=test_results.json --json`.
 
-There is a workflow already pre-configured that automatically publishs a new version when you push your code to the `master` branch. The workflow will take your npm package version and publish the action under that version. You have two options
+The action will set a status to the commit to `pending` under the context `Tangro CI/coverage`. When it finishes it will set the test result as the description of the status.
 
-- Keep the current version number and the action will be updated
-- Bump the version number and a new action will be created
+It is also possible that the action posts a comment with the result to the commit. You have to set `post-comment` to `true`.
 
-The action-release workflow will create a branch with the `package.json` version as its name. An already existing branch will be overwritten.
+## Example with a different command
 
-After the workflow/action has run your action will be available to be used.
+```yml
+- name: Run tests
+  uses: tangro/actions-test@1.0.0
+  with:
+    command: 'tests'
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_CONTEXT: ${{ toJson(github) }}
+```
 
-# FAQ
+## Example with posting the result as a comment
 
-## Do I need to check-in the node_modules folder
+```yml
+- name: Run tests
+  uses: tangro/actions-test@1.0.0
+  with:
+    post-comment: true
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_CONTEXT: ${{ toJson(github) }}
+```
 
-No. This template uses [@zeit/ncc](https://github.com/zeit/ncc) to automatically create and bundle a single `index.js` with the `node_modules` and code included.
+## Development
 
-## Can I put the `dist/` folder into the `.gitignore`
-
-No. It needs to be present for the action. It is planned to automatically alter the `.gitignore` to always check-in the `dist/` folder. But that's not ready yet.
-
-## What happens if I ran `npm build`
-
-Just delete the `dist/` folder.
-
-## Can I use a different branch than `master`
-
-Yes. Edit the `.github/workflows/release-action.yml`
+Follow the guide of the [tangro-actions-template](https://github.com/tangro/tangro-actions-template)

@@ -55,10 +55,7 @@ export async function createChecksFromTestResults({
 }: {
   pathToTestOutput: string;
   context: GitHubContext;
-}): Promise<{
-  formattedTestResults: FormattedTestResults;
-  testSummary: Result<TestResult>;
-}> {
+}): Promise<FormattedTestResults> {
   const name = context.action;
   const ref = context.ref;
   const [owner, repo] = context.repository.split('/');
@@ -115,6 +112,6 @@ export async function createChecksFromTestResults({
       });
     }
 
-    return { formattedTestResults, testSummary };
+    return formattedTestResults;
   }
 }
