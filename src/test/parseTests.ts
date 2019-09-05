@@ -1,7 +1,7 @@
 import { FormattedTestResults } from '@jest/test-result/build/types';
 import { Result } from '../Result';
 
-interface TestResult {
+export interface TestResult {
   testSuites: {
     failed: number;
     passed: number;

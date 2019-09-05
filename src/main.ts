@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { GitHubContext } from '@tangro/tangro-github-toolkit';
+import { GitHubContext, setStatus } from '@tangro/tangro-github-toolkit';
 import path from 'path';
 import { createChecksFromTestResults } from './test/checkRun';
 import { runTest } from './test/runTest';
@@ -35,9 +35,16 @@ async function run() {
       context
     });
 
-    if (testResults.numFailedTestSuites > 0) {
+    if (testResults.formattedTestResults.numFailedTestSuites > 0) {
       core.setFailed('Tests failed. See details.');
     }
+
+    await setStatus({
+      context,
+      description: testResults.testSummary.shortText,
+      state: 'failure',
+      step: 'test'
+    });
   } catch (error) {
     core.setFailed(error.message);
   }

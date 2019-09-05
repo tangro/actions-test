@@ -1,6 +1,7 @@
 import { FormattedTestResults } from '@jest/test-result/build/types';
 import { github, GitHubContext } from '@tangro/tangro-github-toolkit';
-import { parseTests } from './parseTests';
+import { parseTests, TestResult } from './parseTests';
+import { Result } from '../Result';
 
 function chunkArray<T>(
   inputArray: Array<T>,
@@ -54,7 +55,10 @@ export async function createChecksFromTestResults({
 }: {
   pathToTestOutput: string;
   context: GitHubContext;
-}): Promise<FormattedTestResults> {
+}): Promise<{
+  formattedTestResults: FormattedTestResults;
+  testSummary: Result<TestResult>;
+}> {
   const name = context.action;
   const ref = context.ref;
   const [owner, repo] = context.repository.split('/');
@@ -90,7 +94,7 @@ export async function createChecksFromTestResults({
         annotations: chunk.map(testResult => {
           return {
             path: testResult.path.replace(
-              `${process.env.RUNNER_WORKSPACE as string}/${repo}/src/`,
+              `${process.env.RUNNER_WORKSPACE as string}/${repo}/`,
               ''
             ),
             start_line: testResult.location!.line,
@@ -111,6 +115,6 @@ export async function createChecksFromTestResults({
       });
     }
 
-    return formattedTestResults;
+    return { formattedTestResults, testSummary };
   }
 }
