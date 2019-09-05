@@ -8,8 +8,9 @@ export async function runTest() {
   let output = '';
   const options: ExecOptions = {
     ignoreReturnCode: true,
+
     listeners: {
-      stdout: (data: Buffer) => {
+      stderr: (data: Buffer) => {
         output += data.toString();
       }
     }
