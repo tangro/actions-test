@@ -17,7 +17,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@1.0.0
+      uses: tangro/actions-test@1.1.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -44,7 +44,7 @@ It is also possible that the action posts a comment with the result to the commi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@1.0.0
+  uses: tangro/actions-test@1.1.0
   with:
     command: 'tests'
   env:
@@ -56,7 +56,7 @@ It is also possible that the action posts a comment with the result to the commi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@1.0.0
+  uses: tangro/actions-test@1.1.0
   with:
     post-comment: true
   env:

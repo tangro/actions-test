@@ -1,12 +1,13 @@
 {
   "name": "actions-test",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Run jest tests, add status and checks",
   "main": "lib/main.js",
   "scripts": {
     "build": "ncc build src/main.ts --minify",
-    "test": "jest"
+    "test": "jest",
+    "type-check": "tsc -p ./tsconfig.json --noEmit"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
     "@actions/core": "^1.0.0",
     "@actions/exec": "^1.0.0",
     "@jest/test-result": "^24.9.0",
-    "@tangro/tangro-github-toolkit": "0.4.0"
+    "@tangro/tangro-github-toolkit": "0.5.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
