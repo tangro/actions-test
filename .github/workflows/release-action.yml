@@ -15,7 +15,7 @@ jobs:
         run: git checkout -B $(node -p -e "require('./package.json').version")
       - name: merge with master
         run: git merge origin/master --no-edit
-      - name: Authenticate with GitHub package registry
+      - name: Authenticate with GitHub package registry to be able to download from private repositories
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
       - name: npm install
         run: npm install
