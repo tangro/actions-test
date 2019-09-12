@@ -1,0 +1,24 @@
+on:
+  milestone:
+    types: closed
+
+jobs:
+  publish:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@tangro'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'publish package'
+        run: |
+          echo registry=https://npm.pkg.github.com/tangro > $NPM_CONFIG_USERCONFIG
+          echo //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }} >> $NPM_CONFIG_USERCONFIG
+          cat $NPM_CONFIG_USERCONFIG
+          npm publish --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
