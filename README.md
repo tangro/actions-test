@@ -64,6 +64,6 @@ It is also possible that the action posts a comment with the result to the commi
     GITHUB_CONTEXT: ${{ toJson(github) }}
 ```
 
-## Development
+# Development
 
 Follow the guide of the [tangro-actions-template](https://github.com/tangro/tangro-actions-template)
