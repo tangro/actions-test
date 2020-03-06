@@ -44,6 +44,8 @@ The action will set a status to the commit to `pending` under the context `Tangr
 
 It is also possible that the action posts a comment with the result to the commit. You have to set `post-comment` to `true`.
 
+Additionally the test results get written to `./test_result/index.html`. This file can be deployed to a static file server and be linked inside a status.
+
 ## Example with a different command
 
 ```yml
