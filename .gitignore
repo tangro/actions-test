@@ -1,6 +1,6 @@
 node_modules/
 __tests__/runner/*
 .env
-
+.vscode
 test_results.json
 test.js

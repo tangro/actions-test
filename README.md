@@ -2,6 +2,10 @@
 
 Run jest tests, add annotations to failing tests. By default it runs `npm run test:ci` but it can be configured: `npm run ${command}`.
 
+# Versions
+
+Either use a specific version of this action, or `latest` which should always point to the latest version of `actions-test`.
+
 # Example job
 
 ```yml
@@ -9,7 +13,7 @@ test:
   runs-on: ubuntu-latest
   steps:
     - name: Checkout latest code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
