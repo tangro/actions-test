@@ -21,7 +21,7 @@
     "@actions/core": "1.2.4",
     "@actions/exec": "1.0.4",
     "@jest/test-result": "26.1.0",
-    "@tangro/tangro-github-toolkit": "1.0.1"
+    "@tangro/tangro-github-toolkit": "1.0.2"
   },
   "devDependencies": {
     "@types/node": "14.0.18",
