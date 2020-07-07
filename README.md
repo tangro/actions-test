@@ -21,7 +21,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@1.1.0
+      uses: tangro/actions-test@1.1.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -50,7 +50,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@1.1.0
+  uses: tangro/actions-test@1.1.1
   with:
     command: 'tests'
   env:
@@ -62,7 +62,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@1.1.0
+  uses: tangro/actions-test@1.1.1
   with:
     post-comment: true
   env:
