@@ -1,12 +1,15 @@
 {
-  "name": "actions-test",
+  "name": "@tangro/actions-test",
   "version": "1.1.2",
   "private": true,
   "description": "Run jest tests, add status and checks",
   "main": "lib/main.js",
   "scripts": {
-    "build": "ncc build src/main.ts --minify",
-    "type-check": "tsc -p ./tsconfig.json --noEmit"
+    "build": "rimraf dist && ncc build src/main.ts --minify",
+    "update-readme": "node scripts/update-readme.js",
+    "update-dependencies": "npx npm-check-updates -u",
+    "version": "npm run build && git add -A",
+    "postversion": "npm run update-readme && git add -A && git commit -m \"updated readme\" && git push"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,7 @@
   "devDependencies": {
     "@types/node": "14.11.5",
     "@zeit/ncc": "0.22.3",
+    "ejs": "3.1.5",
     "typescript": "4.0.3"
   }
 }
