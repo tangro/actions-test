@@ -102,7 +102,7 @@ test:
         zip --quiet --recurse-paths ../test_result.zip *
     - name: Deploy test result
       if: always()
-      uses: <%= tangro['actions-deploy] %>
+      uses: <%= tangro['actions-deploy'] %>
       with:
         context: auto
         zip-file: test_result.zip
