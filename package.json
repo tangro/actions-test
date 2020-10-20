@@ -23,11 +23,11 @@
   "dependencies": {
     "@actions/core": "1.2.6",
     "@actions/exec": "1.0.4",
-    "@jest/test-result": "26.5.2",
+    "@jest/test-result": "26.6.0",
     "@tangro/tangro-github-toolkit": "1.0.3"
   },
   "devDependencies": {
-    "@types/node": "14.11.8",
+    "@types/node": "14.11.10",
     "@zeit/ncc": "0.22.3",
     "ejs": "3.1.5",
     "rimraf": "3.0.2",
