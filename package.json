@@ -21,13 +21,13 @@
   "author": "ankri",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "1.5.0",
+    "@actions/core": "1.6.0",
     "@actions/exec": "1.1.0",
-    "@jest/test-result": "27.2.2",
+    "@jest/test-result": "27.2.4",
     "@tangro/tangro-github-toolkit": "1.0.3"
   },
   "devDependencies": {
-    "@types/node": "16.10.1",
+    "@types/node": "16.10.2",
     "@zeit/ncc": "0.22.3",
     "ejs": "3.1.6",
     "rimraf": "3.0.2",
