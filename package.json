@@ -21,9 +21,9 @@
   "author": "ankri",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "1.7.0",
+    "@actions/core": "1.8.0",
     "@actions/exec": "1.1.1",
-    "@jest/test-result": "28.0.2",
+    "@jest/test-result": "28.1.0",
     "@tangro/tangro-github-toolkit": "1.0.3"
   },
   "devDependencies": {
