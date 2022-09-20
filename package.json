@@ -27,7 +27,7 @@
     "@tangro/tangro-github-toolkit": "1.0.3"
   },
   "devDependencies": {
-    "@types/node": "18.7.17",
+    "@types/node": "18.7.18",
     "@zeit/ncc": "0.22.3",
     "ejs": "3.1.8",
     "rimraf": "3.0.2",
