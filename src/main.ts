@@ -44,7 +44,8 @@ async function run() {
         context
       });
 
-      const formattedTestResults = require(pathToTestOutput) as FormattedTestResults;
+      const formattedTestResults =
+        require(pathToTestOutput) as FormattedTestResults;
       const testSummary = parseTests(formattedTestResults);
 
       if (testResults.numFailedTestSuites > 0) {
@@ -61,7 +62,7 @@ async function run() {
       });
     }
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed((error as Error).message);
   }
 }
 
