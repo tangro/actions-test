@@ -61,7 +61,8 @@ export async function createChecksFromTestResults({
 }): Promise<FormattedTestResults> {
   const [owner, repo] = context.repository.split('/');
 
-  const formattedTestResults = require(pathToTestOutput) as FormattedTestResults;
+  const formattedTestResults =
+    require(pathToTestOutput) as FormattedTestResults;
 
   const checkRun = await getCheckRunForAction({
     context
@@ -70,7 +71,7 @@ export async function createChecksFromTestResults({
   const testResults = parseTestOutput(formattedTestResults);
 
   // GitHub only allows to send 50 checks at a time
-  const chunkedTestResults = chunkArray(testResults, 50);
+  const chunkedTestResults = chunkArray<any>(testResults, 50);
   const testSummary = parseTests(formattedTestResults);
 
   for (const chunk of chunkedTestResults) {
