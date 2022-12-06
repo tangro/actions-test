@@ -9,5 +9,5 @@ inputs:
     description: 'Set to true to post a comment after the test result has been collected. Default false'
     default: false
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
