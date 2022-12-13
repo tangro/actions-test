@@ -8,3 +8,5 @@ updates:
       day: 'tuesday'
       # 06:30 UTC = 08:30 Heidelberg
       time: '06:30'
+    reviewers:
+      - "ankri"
