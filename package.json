@@ -30,7 +30,7 @@
     "@types/node": "18.15.11",
     "@zeit/ncc": "0.22.3",
     "ejs": "3.1.9",
-    "rimraf": "4.4.1",
-    "typescript": "5.0.3"
+    "rimraf": "5.0.0",
+    "typescript": "5.0.4"
   }
 }
