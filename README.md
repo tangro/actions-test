@@ -4,7 +4,7 @@ Run jest tests, add annotations to failing tests. By default it runs `npm run te
 
 # Versions
 
-You can use a specific `version` of this action. The latest published version is `v1.1.12`. You can also use `latest` to always get the latest version.
+You can use a specific `version` of this action. The latest published version is `v1.1.13`. You can also use `latest` to always get the latest version.
 
 # Example job
 
@@ -21,7 +21,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@v1.1.12
+      uses: tangro/actions-test@v1.1.13
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -50,7 +50,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@v1.1.12
+  uses: tangro/actions-test@v1.1.13
   with:
     command: 'tests'
   env:
@@ -62,7 +62,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@v1.1.12
+  uses: tangro/actions-test@v1.1.13
   with:
     post-comment: true
   env:
@@ -91,7 +91,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@v1.1.12
+      uses: tangro/actions-test@v1.1.13
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -102,7 +102,7 @@ test:
         zip --quiet --recurse-paths ../test_result.zip *
     - name: Deploy test result
       if: always()
-      uses: tangro/actions-deploy@v1.2.14
+      uses: tangro/actions-deploy@v1.2.15
       with:
         context: auto
         zip-file: test_result.zip
