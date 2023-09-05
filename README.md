@@ -4,7 +4,7 @@ Run jest tests, add annotations to failing tests. By default it runs `npm run te
 
 # Versions
 
-You can use a specific `version` of this action. The latest published version is `v1.1.15`. You can also use `latest` to always get the latest version.
+You can use a specific `version` of this action. The latest published version is `v1.1.16`. You can also use `latest` to always get the latest version.
 
 # Example job
 
@@ -13,7 +13,7 @@ test:
   runs-on: ubuntu-latest
   steps:
     - name: Checkout latest code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Use Node.js 16.x
       uses: actions/setup-node@v3.8.1
       with:
@@ -21,7 +21,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@v1.1.15
+      uses: tangro/actions-test@v1.1.16
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -50,7 +50,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@v1.1.15
+  uses: tangro/actions-test@v1.1.16
   with:
     command: 'tests'
   env:
@@ -62,7 +62,7 @@ Additionally the test results get written to `./test_result/index.html`. This fi
 
 ```yml
 - name: Run tests
-  uses: tangro/actions-test@v1.1.15
+  uses: tangro/actions-test@v1.1.16
   with:
     post-comment: true
   env:
@@ -81,7 +81,7 @@ test:
   runs-on: ubuntu-latest
   steps:
     - name: Checkout latest code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Use Node.js 16.x
       uses: actions/setup-node@v3.8.1
       with:
@@ -91,7 +91,7 @@ test:
     - name: Run npm install
       run: npm install
     - name: Run tests
-      uses: tangro/actions-test@v1.1.15
+      uses: tangro/actions-test@v1.1.16
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
