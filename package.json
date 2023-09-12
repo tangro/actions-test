@@ -21,14 +21,14 @@
   "author": "ankri",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "1.10.0",
+    "@actions/core": "1.10.1",
     "@actions/exec": "1.1.1",
     "@jest/test-result": "29.6.4",
     "@tangro/tangro-github-toolkit": "1.0.9",
-    "@vercel/ncc": "0.36.1"
+    "@vercel/ncc": "0.38.0"
   },
   "devDependencies": {
-    "@types/node": "20.5.9",
+    "@types/node": "20.6.0",
     "ejs": "3.1.9",
     "rimraf": "5.0.1",
     "typescript": "5.2.2"
