@@ -25,10 +25,10 @@
     "@actions/exec": "1.1.1",
     "@jest/test-result": "29.7.0",
     "@tangro/tangro-github-toolkit": "1.0.9",
-    "@vercel/ncc": "0.38.0"
+    "@vercel/ncc": "0.38.1"
   },
   "devDependencies": {
-    "@types/node": "20.8.6",
+    "@types/node": "20.8.8",
     "ejs": "3.1.9",
     "rimraf": "5.0.5",
     "typescript": "5.2.2"
