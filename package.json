@@ -28,7 +28,7 @@
     "@vercel/ncc": "0.38.1"
   },
   "devDependencies": {
-    "@types/node": "20.12.12",
+    "@types/node": "20.14.1",
     "ejs": "3.1.10",
     "rimraf": "5.0.7",
     "typescript": "5.4.5"
