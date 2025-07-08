@@ -23,12 +23,12 @@
   "dependencies": {
     "@actions/core": "1.11.1",
     "@actions/exec": "1.1.1",
-    "@jest/test-result": "30.0.2",
+    "@jest/test-result": "30.0.4",
     "@tangro/tangro-github-toolkit": "1.0.10",
     "@vercel/ncc": "0.38.3"
   },
   "devDependencies": {
-    "@types/node": "24.0.8",
+    "@types/node": "24.0.10",
     "ejs": "3.1.10",
     "rimraf": "6.0.1",
     "typescript": "5.8.3"
