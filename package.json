@@ -23,7 +23,7 @@
   "dependencies": {
     "@actions/core": "1.11.1",
     "@actions/exec": "1.1.1",
-    "@jest/test-result": "30.0.5",
+    "@jest/test-result": "30.1.2",
     "@tangro/tangro-github-toolkit": "1.0.10",
     "@vercel/ncc": "0.38.3"
   },
