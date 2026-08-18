@@ -25,7 +25,7 @@
     "@actions/exec": "3.0.0",
     "@jest/test-result": "30.4.1",
     "@tangro/tangro-github-toolkit": "1.0.10",
-    "@vercel/ncc": "0.44.1"
+    "@vercel/ncc": "0.45.0"
   },
   "devDependencies": {
     "@types/node": "26.2.0",
