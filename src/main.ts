@@ -45,10 +45,7 @@ async function run() {
         context
       });
 
-      const formattedTestResults = JSON.parse(
-        fs.readFileSync(pathToTestOutput, 'utf8')
-      ) as FormattedTestResults;
-      const testSummary = parseTests(formattedTestResults);
+      const testSummary = parseTests(testResults);
 
       if (testResults.numFailedTestSuites > 0) {
         core.setFailed('Tests failed. See details.');
