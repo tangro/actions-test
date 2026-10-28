@@ -1,4 +1,4 @@
-import { FormattedTestResults } from '@jest/test-result/build/types';
+import type { FormattedTestResults } from '@jest/test-result';
 import { Result } from '@tangro/tangro-github-toolkit';
 
 export interface TestResult {

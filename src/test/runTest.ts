@@ -1,8 +1,7 @@
 import * as core from '@actions/core';
-import { exec } from '@actions/exec';
+import { exec, type ExecOptions } from '@actions/exec';
 import * as fs from 'fs';
 import path from 'path';
-import { ExecOptions } from '@actions/exec/lib/interfaces';
 
 export async function runTest() {
   let output = '';

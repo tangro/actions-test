@@ -5,7 +5,7 @@
   "description": "Run jest tests, add status and checks",
   "main": "lib/main.js",
   "scripts": {
-    "build": "rimraf dist && ncc build src/main.ts --minify",
+    "build": "rimraf dist lib && tsc && ncc build lib/main.js --minify",
     "update-readme": "node scripts/update-readme.js",
     "update-dependencies": "npx npm-check-updates -u",
     "version": "npm run build && git add -A",
@@ -24,7 +24,7 @@
     "@actions/core": "3.0.1",
     "@actions/exec": "3.0.0",
     "@jest/test-result": "30.5.2",
-    "@tangro/tangro-github-toolkit": "1.0.10",
+    "@tangro/tangro-github-toolkit": "2.0.0",
     "@vercel/ncc": "0.45.0"
   },
   "devDependencies": {
