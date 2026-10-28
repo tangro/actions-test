@@ -1,4 +1,5 @@
-import { FormattedTestResults } from '@jest/test-result/build/types';
+import type { FormattedTestResults } from '@jest/test-result';
+import * as fs from 'fs';
 import {
   GitHubContext,
   getCheckRunForAction,
@@ -61,8 +62,9 @@ export async function createChecksFromTestResults({
 }): Promise<FormattedTestResults> {
   const [owner, repo] = context.repository.split('/');
 
-  const formattedTestResults =
-    require(pathToTestOutput) as FormattedTestResults;
+  const formattedTestResults = JSON.parse(
+    fs.readFileSync(pathToTestOutput, 'utf8')
+  ) as FormattedTestResults;
 
   const checkRun = await getCheckRunForAction({
     context

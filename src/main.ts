@@ -5,10 +5,11 @@ import {
   createComment
 } from '@tangro/tangro-github-toolkit';
 import path from 'path';
+import * as fs from 'fs';
 import { createChecksFromTestResults } from './test/checkRun';
 import { runTest } from './test/runTest';
 import { parseTests } from './test/parseTests';
-import { FormattedTestResults } from '@jest/test-result/build/types';
+import type { FormattedTestResults } from '@jest/test-result';
 
 async function run() {
   try {
@@ -44,8 +45,9 @@ async function run() {
         context
       });
 
-      const formattedTestResults =
-        require(pathToTestOutput) as FormattedTestResults;
+      const formattedTestResults = JSON.parse(
+        fs.readFileSync(pathToTestOutput, 'utf8')
+      ) as FormattedTestResults;
       const testSummary = parseTests(formattedTestResults);
 
       if (testResults.numFailedTestSuites > 0) {
